@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Awaiting Role Assignment{% endblock %}
+
+{% block content %}
+<main class="flex flex-col justify-center items-center p-5 mx-auto min-h-screen bg-zinc-900">
+    <div class="text-center max-w-2xl mx-auto">
+        <h1 class="mb-5 text-5xl text-center text-white max-md:text-4xl max-sm:text-3xl">
+            <span class="text-stone-400">Welcome to </span>
+            <span class="text-stone-400">Peer Sight</span>
+        </h1>
+        
+        <div class="bg-zinc-800 p-8 rounded-lg shadow-lg mt-8">
+            <h2 class="text-2xl text-white mb-4">Account Created Successfully!</h2>
+            <p class="text-lg text-gray-300 mb-6">
+                Your account has been created, but a role needs to be assigned before you can access the dashboard.
+                Please contact your administrator to have your role assigned as either a student or professor.
+            </p>
+            <p class="text-gray-400">
+                Logged in as: {{ user.email }}
+            </p>
+            <div class="mt-8">
+                <a href="{% url 'logout' %}" class="bg-zinc-700 text-white px-6 py-3 rounded-lg hover:bg-zinc-600 transition-colors">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %} 

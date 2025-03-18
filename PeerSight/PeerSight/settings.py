@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.google" 
 ]
 
+# The key part: these settings tell allauth to skip the intermediate step
+SOCIALACCOUNT_LOGIN_ON_GET = True
+SOCIALACCOUNT_AUTO_SIGNUP = True
+
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": [
@@ -79,6 +83,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'templates',
             BASE_DIR / 'users' / 'templates',
+            BASE_DIR / 'users' / 'templates' / 'users',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -164,3 +169,6 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# Configure the custom social account adapter
+SOCIALACCOUNT_ADAPTER = 'users.models.CustomSocialAccountAdapter'

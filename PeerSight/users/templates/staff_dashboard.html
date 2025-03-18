@@ -1,216 +1,174 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
 
-{% block title %}Staff Dashboard{% endblock %}
+{% block extra_head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'users/css/adminDashboardStyles.css' %}">
+{% endblock %}
+
+<!--Administrator sidebar-->
+{% block nav %}
+<nav
+    class="flex flex-col gap-2 px-0 py-5 h-screen bg-gray-800 w-[300px] max-md:w-[250px] max-sm:p-2.5 max-sm:w-full max-sm:h-auto"
+    id="sidebar"
+>
+    <ul class="w-full">
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-home text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Admin Dashboard</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-book text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Your Classes</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-layout-grid text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Your Sections</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-users text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Manage Teams</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-list text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Manage Forms</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-plus text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Create Form</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-chart-dots text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >View/Evaluate Responses</span
+            >
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="flex gap-4 items-center px-6 py-3 cursor-pointer duration-[0.2s] transition-[background-color] hover:bg-gray-700 max-md:px-5 max-md:py-2.5 max-sm:px-4 max-sm:py-3"
+            data-nav-item
+          >
+            <i class="ti ti-mail text-2xl text-white"></i>
+            <span class="text-base font-medium text-white max-md:text-sm"
+              >Manage Reminders</span
+            >
+          </a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
+
 
 {% block content %}
-<head>
-    <title>Staff Dashboard</title>
-    <style>
-        body {
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 20px auto;
-            font-family: Arial, sans-serif;
-        }
-        
-        h2 {
-            text-align: left;
-            background-color: rgba(80, 80, 80, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .stat-card {
-            background: #333;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #DCCAA0;
-        }
-        
-        .stat-label {
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
-        
-        .section-header {
-            background-color: rgba(80, 80, 80, 0.8);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        
-        .classes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .class-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .class-header {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .class-info {
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #eee;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: #4CAF50;
-            border-radius: 5px;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .action-button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            text-decoration: none;
-            text-align: center;
-        }
-        
-        .primary-button {
-            background: #1C1C1C;
-            color: white;
-        }
-        
-        .secondary-button {
-            background: #666;
-            color: white;
-        }
-        
-        .logout-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-        
-        @media (max-width: 768px) {
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .classes-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-
 <div class="dashboard-container">
-    <h2>Welcome, Professor {{ username }}</h2>
-    
-    <div class="stats-container">
-        <div class="stat-card">
-            <div class="stat-number">{{ total_students|default:"156" }}</div>
-            <div class="stat-label">Total Students</div>
+    <h2>Hello <strong>Administrator</strong> {{ username }}, your current classes are:</h2>
+
+    <div class="card-container">
+        {% for class in classes %}
+        <div class="class-card"> 
+            <span class="class-tag">{{ class.code }}</span>
+            <span class="class-name">{{ class.name }}</span>
+            <span class="class-tag">{{ class.term }}</span>
         </div>
-        <div class="stat-card">
-            <div class="stat-number">{{ pending_reviews|default:"25" }}</div>
-            <div class="stat-label">Pending Reviews</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">{{ completion_rate|default:"85" }}%</div>
-            <div class="stat-label">Average Completion Rate</div>
-        </div>
+        {% endfor %}
     </div>
     
-    <div class="section-header">Your Classes</div>
-    
-    <div class="classes-grid">
-        {% if classes %}
-            {% for class in classes %}
-                <div class="class-card">
-                    <div class="class-header">{{ class.name }}</div>
-                    <div class="class-info">{{ class.students }} Students</div>
-                    <div class="class-info">{{ class.reviews_completed }}/{{ class.total_reviews }} Reviews Completed</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: {{ class.completion_percentage }}%"></div>
-                    </div>
-                    <div class="action-buttons">
-                        <a href="#" class="action-button primary-button">View Details</a>
-                        <a href="#" class="action-button secondary-button">Manage Reviews</a>
-                    </div>
-                </div>
+    <div class="form-section"> 
+        <h2 style="font-size:15px">Your Forms:</h2>
+        <h2 style="font-size:12px">Sort By: Deadline</h2>
+    </div>
+
+    <div class="form-container"> 
+        <div class="forms">
+            <h3>Name</h3>
+            {% for form in forms %}
+            <p>{{ form.name }}</p>
             {% endfor %}
-        {% else %}
-            <div class="class-card">
-                <div class="class-header">Software Engineering (CSCI3356.01)</div>
-                <div class="class-info">38 Students</div>
-                <div class="class-info">29/38 Reviews Completed</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 76%"></div>
-                </div>
-                <div class="action-buttons">
-                    <a href="#" class="action-button primary-button">View Details</a>
-                    <a href="#" class="action-button secondary-button">Manage Reviews</a>
-                </div>
-            </div>
-            <div class="class-card">
-                <div class="class-header">Software Engineering (CSCI3356.02)</div>
-                <div class="class-info">31 Students</div>
-                <div class="class-info">25/31 Reviews Completed</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 81%"></div>
-                </div>
-                <div class="action-buttons">
-                    <a href="#" class="action-button primary-button">View Details</a>
-                    <a href="#" class="action-button secondary-button">Manage Reviews</a>
-                </div>
-            </div>
-        {% endif %}
+        </div>
+
+        <div class="forms">
+            <h3>Class</h3>
+            {% for form in forms %}
+            <p>{{ form.class }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="forms">
+            <h3>Students Submitted</h3>
+            {% for form in forms %}
+            <p style="color:{% if form.submitted == form.total %}#34A853{% else %}#E42D2D{% endif %}">
+                {{ form.submitted }}/{{ form.total }}
+            </p>
+            {% endfor %}
+        </div>
+
+        <div class="forms">
+            <h3>Due Date</h3>
+            {% for form in forms %}
+            <p>{{ form.due_date }}</p>
+            {% endfor %}
+        </div>
     </div>
-    
-    <div class="logout-container">
-        <a href="{% url 'logout' %}" class="action-button primary-button">Logout</a>
+
+    <div class="logout">
+        <a href="{% url 'logout' %}">
+            <button type="button" class="logout-button">Logout</button>
+        </a>
     </div>
 </div>
-{% endblock %} 
+{% endblock %}
