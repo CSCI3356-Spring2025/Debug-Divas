@@ -249,6 +249,7 @@ def fill_form_view(request, form_id):
                             # optionally log this or skip saving
                             pass
                     elif question.question_type == 'likert':
+                        print(f"LIKERT DEBUG | question_{question.id} = {answer}")
                         question_response.rating_value = int(answer)
                     
                     question_response.save()
